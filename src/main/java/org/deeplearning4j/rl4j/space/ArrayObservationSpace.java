@@ -1,6 +1,7 @@
 package org.deeplearning4j.rl4j.space;
 
 import lombok.Value;
+import org.json.JSONObject;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
@@ -26,4 +27,7 @@ public class ArrayObservationSpace<O> implements ObservationSpace<O> {
         high = Nd4j.create(1);
     }
 
+    public O getValue(JSONObject obj, String key) {
+        return null;
+    }
 }

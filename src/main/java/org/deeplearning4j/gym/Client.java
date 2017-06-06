@@ -5,6 +5,7 @@ import com.mashape.unirest.http.JsonNode;
 import lombok.Value;
 import org.deeplearning4j.rl4j.space.GymObservationSpace;
 import org.deeplearning4j.rl4j.space.ActionSpace;
+import org.deeplearning4j.rl4j.space.ObservationSpace;
 import org.json.JSONObject;
 
 import java.util.Set;
@@ -43,7 +44,7 @@ public class Client<O, A, AS extends ActionSpace<A>> {
     String url;
     String envId;
     String instanceId;
-    GymObservationSpace<O> observationSpace;
+    ObservationSpace<O> observationSpace;
     AS actionSpace;
     boolean render;
 
@@ -165,7 +166,7 @@ public class Client<O, A, AS extends ActionSpace<A>> {
 
     private void uploadPost(JSONObject json) {
         try {
-            ClientUtils.post(url + V1_ROOT + UPLOAD, json);
+            ClientUtils.post(url + V1_ROOT + instanceId + UPLOAD, json);
         } catch (RuntimeException e) {
             Logger logger = Logger.getLogger("Client Upload");
             logger.log(Level.SEVERE, "Impossible to upload: Wrong API key?");
@@ -179,7 +180,5 @@ public class Client<O, A, AS extends ActionSpace<A>> {
         serverShutdown(url);
     }
 
-    public ActionSpace getActionSpace(){
-        return actionSpace;
-    }
+
 }
